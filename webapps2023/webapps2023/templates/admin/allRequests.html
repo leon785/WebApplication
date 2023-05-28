@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    administrator view all Requests
+{% endblock %}
+
+{% block content %}
+    <h3>All Requests</h3>
+    <br/>
+
+    <div style="text-align: center">
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Request_From</th>
+            <th>Request_To</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Time_Request</th>
+            <th>Time_Process</th>
+            <th>Status</th>
+        </tr>
+        {% for r in request_list %}
+            <tr>
+                <td>{{ r.id }}</td>
+                <td><b><font color="green">{{ r.request_from }}</font></b></td>
+                <td>{{ r.request_to }}</td>
+                <td>{{ r.points_requesting }}</td>
+                <td>{{ r.requested_currency }}</td>
+                <td>{{ r.time_requesting }}</td>
+                <td>{{ r.time_processing }}</td>
+                <td>{{ r.request_status }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

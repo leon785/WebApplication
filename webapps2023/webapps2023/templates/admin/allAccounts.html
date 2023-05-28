@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    administrator view all accounts
+{% endblock %}
+
+{% block content %}
+    <h3>All Registered Accounts</h3>
+    <br/>
+
+    <div style="text-align: center">
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Is Superuser</th>
+            <th>Balance</th>
+            <th>Currency</th>
+        </tr>
+        {% for u in user_list %}
+            <tr>
+                <td>{{ u.id }}</td>
+                <td><b><font color="green">{{ u.username }}</font></b></td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.first_name }}</td>
+                <td>{{ u.last_name }}</td>
+                <td>{% if u.is_superuser == True %}
+                    <b><font color="red">{{ u.is_superuser }}</font></b>
+                    {% else %}
+                        {{ u.is_superuser }}
+                    {% endif %}
+                </td>
+                {% for a in account_list %}
+                    {% if a.user_id == u.id %}
+                        <td>{{ a.balance }}</td>
+                        <td>{{ a.currency }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <br/><br/>
+
+{% endblock %}

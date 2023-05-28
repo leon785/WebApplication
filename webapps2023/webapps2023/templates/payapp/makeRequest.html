@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    send a payment request to other user
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h3>Make a request</h3>
+    <br/>
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br/>
+        <button type="submit" class="btn btn-success">Send the Request</button>
+        <br/><br>
+        <b><font color="green">{{ hint_msg }}</font></b>
+        <b><font color="red">{{ error_msg }}</font></b>
+    </form>
+{% endblock %}

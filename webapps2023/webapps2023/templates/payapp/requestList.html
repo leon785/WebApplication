@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Requests List
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h3>Past Requests</h3>
+    <br/>
+
+    <h5>Requests you received</h5>
+    <br/>
+    <div>
+        <table>
+        {% for rr in received_requests %}
+            <tr>
+                {{ rr.id }}: From {{ rr.request_from }},
+                request <b>{{ rr.points_requesting }} {{ rr.requested_currency }}</b>,
+                at {{ rr.time_requesting }}
+                {% if rr.request_status == None %}
+                    <button type="submit" name="Accept"
+                            onclick="location.href='{% url 'button_accept' %}?request_id={{rr.id}}'">Accept</button>
+                    <emsp/>
+                    <button type="submit" name="Decline"
+                            onclick="location.href='{% url 'button_decline' %}?request_id={{rr.id}}'">Decline</button>
+                    <font color="red">{{ msg }}</font>
+                {% elif rr.request_status == False %}
+                    <b><font color="red"> --- --- Declined</font></b>
+                    at {{ rr.time_processing }}
+                {% elif rr.request_status == True %}
+                    <b><font color="green"> --- --- Accepted</font></b>
+                    at {{ rr.time_processing }}
+                {% endif %}
+                <br/><br/>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <br/><br/>
+
+    <h5>Requests you sent</h5>
+    <br/>
+    <div>
+        <table>
+        {% for sr in sent_requests %}
+            <tr>
+                {{ sr.id }}: To {{ sr.request_to }},
+                request <b>{{ sr.points_requesting }} {{ sr.requested_currency }}</b>,
+                at {{ sr.time_requesting }}
+                {% if sr.request_status == None %}
+                    <font color="#808080"> --- --- Pending...</font>
+                {% elif sr.request_status == False %}
+                    <b><font color="red"> --- --- Declined</font></b>
+                    at {{ sr.time_processing }}
+                {% elif sr.request_status == True %}
+                    <b><font color="green"> --- --- Accepted</font></b>
+                    at {{ sr.time_processing }}
+                {% endif %}
+                <br/><br/>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

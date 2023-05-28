@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Transfer Points Between Users
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h3>Transfer Money</h3>
+    <br/>
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br/>
+        <button type="submit" class="btn btn-success">Transfer</button>
+        <br/><br>
+        <b><font color="green">{{ hint_msg }}</font></b>
+        <b><font color="red">{{ error_msg }}</font></b>
+    </form>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    administrator view all Transactions
+{% endblock %}
+
+{% block content %}
+    <h3>All Transactions</h3>
+    <br/>
+
+    <div style="text-align: center">
+        <table>
+        <tr>
+            <th>ID</th>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Time</th>
+        </tr>
+        {% for t in transaction_list %}
+            <tr>
+                <td>{{ t.id }}</td>
+                <td>{{ t.sender_name }}</td>
+                <td>{{ t.recipient_name }}</td>
+                <td>{{ t.points_to_transfer }}</td>
+                <td>{{ t.sent_currency }}</td>
+                <td>{{ t.time_sending }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

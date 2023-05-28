@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_filters %}
+{% block title %}Login to Account{% endblock %}
+{% block content %}
+    <h1 class="main-header">Login</h1>
+    <form action="{% url 'login_user' %}" method="post">
+        {% csrf_token %}
+        {{ login_user | crispy }}
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+    {% if failed_login %}
+        <div class="alert alert-danger" role="alert" style="margin-top: 20px">
+            Invalid login details!
+        </div>
+    {% endif %}
+    <p class="text-center">Don't have an account? <a href="{% url 'register_user' %}">Create an account</a>.</p>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_filters %}
+{% block title %}Create new admin{% endblock %}
+{% block content %}
+    <h1 class="main-header">Create new admin</h1>
+    <form action="{% url 'create_new_admin' %}" method="post">
+        {% csrf_token %}
+        {{ register_user | crispy }}
+        <button class="btn btn-primary" type="submit">Create new admin</button>
+    </form>
+    {% if failed_signup %}
+        <div class="alert alert-danger" role="alert" style="margin-top: 20px">
+            Invalid signup details!
+        </div>
+    {% endif %}
+    <br/>
+    <b><font color="green">{{ hint_msg }}</font></b>
+    <b><font color="red">{{ error_msg }}</font></b>
+{% endblock %}

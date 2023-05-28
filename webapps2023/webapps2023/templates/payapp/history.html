@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Your Payments History
+{% endblock %}
+
+{% block content %}
+    <h3>Payments History</h3>
+    <br/>
+
+    <h5>Transactions you sent</h5>
+    <div style="text-align: center">
+        <table>
+        <tr>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Time</th>
+        </tr>
+        {% for t in send_list %}
+            <tr>
+                <td><b><font color="green">{{ t.sender_name }}</font></b></td>
+                <td>{{ t.recipient_name }}</td>
+                <td>{{ t.points_to_transfer }}</td>
+                <td>{{ t.sent_currency }}</td>
+                <td>{{ t.time_sending }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <br/><br/>
+
+    <h5>Transactions you received</h5>
+    <div style="text-align: center">
+        <table>
+        <tr>
+            <th>Sender</th>
+            <th>Receiver</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Time</th>
+        </tr>
+        {% for t in receive_list %}
+            <tr>
+                <td>{{ t.sender_name }}</td>
+                <td><b><font color="green">{{ t.recipient_name }}</font></b></td>
+                <td>{{ t.points_to_transfer }}</td>
+                <td>{{ t.sent_currency }}</td>
+                <td>{{ t.time_sending }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}
